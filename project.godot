@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="shape_shooter"
+config/name="server_template"
 run/main_scene="uid://cu2c5qum5ve7m"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
