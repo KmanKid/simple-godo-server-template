@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu2c5qum5ve7m"]
+
+[ext_resource type="Script" uid="uid://eewyc3qbbc3e" path="res://game.gd" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://tbnvmd2ge8mk" path="res://chat.gd" id="2_e2o6t"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_e2o6t"]
+properties/0/path = NodePath("Chat:messages")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="Game" type="Node"]
+script = ExtResource("1_80nbo")
+
+[node name="Chat" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_e2o6t")
+
+[node name="Messages" type="TextEdit" parent="Chat"]
+layout_mode = 2
+offset_left = 467.0
+offset_top = 44.0
+offset_right = 705.0
+offset_bottom = 549.0
+editable = false
+
+[node name="Role" type="RichTextLabel" parent="Chat"]
+layout_mode = 2
+offset_left = 470.0
+offset_top = 12.0
+offset_right = 703.0
+offset_bottom = 45.0
+text = "Server"
+
+[node name="Input" type="TextEdit" parent="Chat"]
+offset_left = 469.0
+offset_top = 555.0
+offset_right = 707.0
+offset_bottom = 594.0
+placeholder_text = "Chat: ..."
+
+[node name="MessageSync" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_e2o6t")
+
+[connection signal="text_changed" from="Chat/Input" to="Chat" method="_on_input_text_changed"]
